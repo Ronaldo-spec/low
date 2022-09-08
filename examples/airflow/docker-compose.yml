@@ -92,20 +92,6 @@ services:
     extra_hosts:
       - "localhost:172.16.240.10"
       - "elasticsearch:172.16.240.11"
-  app:
-      build:
-          context: .
-          dockerfile: .docker/Dockerfile
-      image: 'shouts.dev/laravel'
-      container_name: shouts-laravel-app
-      ports:
-          - "80:80"
-      volumes:
-          - ./:/var/www/html
-      networks:
-          - laravel-shouts
-      depends_on:
-          - mysql
   mariadb:
     image: mariadb:10.3
     container_name: mysql
@@ -211,8 +197,6 @@ volumes:
   postgres-db-volume:
 
 networks:
-    laravel-shouts:
-        driver: bridge
     app_net:
       ipam:
         driver: default
